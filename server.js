@@ -8,6 +8,9 @@ app.get('/', function(req, res){
 
 app.use(express.static('public'));
 
+var db = require('./models');
+
+
 app.listen(process.env.PORT || 3000, function(){
   console.log('Wuuurk');
 });
