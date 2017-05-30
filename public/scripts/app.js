@@ -9,48 +9,64 @@
 /* hard-coded data! */
 var sampleAlbums = [];
 sampleAlbums.push({
-             artistName: 'Ladyhawke',
-             name: 'Ladyhawke',
-             releaseDate: '2008, November 18',
-             genres: [ 'new wave', 'indie rock', 'synth pop' ]
-           });
+  artistName: 'Ladyhawke',
+  name: 'Ladyhawke',
+  releaseDate: '2008, November 18',
+  genres: ['new wave', 'indie rock', 'synth pop']
+});
 sampleAlbums.push({
-             artistName: 'The Knife',
-             name: 'Silent Shout',
-             releaseDate: '2006, February 17',
-             genres: [ 'synth pop', 'electronica', 'experimental' ]
-           });
+  artistName: 'The Knife',
+  name: 'Silent Shout',
+  releaseDate: '2006, February 17',
+  genres: ['synth pop', 'electronica', 'experimental']
+});
 sampleAlbums.push({
-             artistName: 'Juno Reactor',
-             name: 'Shango',
-             releaseDate: '2000, October 9',
-             genres: [ 'electronic', 'goa trance', 'tribal house' ]
-           });
+  artistName: 'Juno Reactor',
+  name: 'Shango',
+  releaseDate: '2000, October 9',
+  genres: ['electronic', 'goa trance', 'tribal house']
+});
 sampleAlbums.push({
-             artistName: 'Philip Wesley',
-             name: 'Dark Night of the Soul',
-             releaseDate: '2008, September 12',
-             genres: [ 'piano' ]
-           });
+  artistName: 'Philip Wesley',
+  name: 'Dark Night of the Soul',
+  releaseDate: '2008, September 12',
+  genres: ['piano']
+});
 /* end of hard-coded data */
 
 
 
 
 
-  $(document).ready(function() {
+$(document).ready(function() {
 
   console.log('app.js loaded!');
-  renderAlbum(sampleAlbums[2]);
+  renderAlbum(sampleAlbums);
+  //make a get request for all albums
+  $.ajax({
+    method: 'GET',
+    url: '/api/albums',
+    success: handleSuccess,
+    error: handleError
+  });
 });
 
+function handleSuccess (albums) {
+  // albums.forEach(function(album){
+    renderAlbum(albums);
+  };
 
+
+function handleError(err){
+  console.log('There has been an error: ', err);
+}
 
 
 
 // this function takes a single album and renders it to the page
 function renderAlbum(album) {
-$('#albums').append(`
+  for (var i = 0; i < album.length; i++) {
+    $('#albums').append(`
   <div class="row album">
 
     <div class="col-md-10 col-md-offset-1">
@@ -68,17 +84,17 @@ $('#albums').append(`
               <ul class="list-group">
                 <li class="list-group-item">
                   <h4 class='inline-header'>Album Name:</h4>
-                  <span class='album-name'>${album.name}</span>
+                  <span class='album-name'>${album[i].name}</span>
                 </li>
 
                 <li class="list-group-item">
                   <h4 class='inline-header'>Artist Name:</h4>
-                  <span class='artist-name'>${album.artistName}</span>
+                  <span class='artist-name'>${album[i].artistName}</span>
                 </li>
 
                 <li class="list-group-item">
                   <h4 class='inline-header'>Released date:</h4>
-                  <span class='album-releaseDate'>${album.releaseDate}</span>
+                  <span class='album-releaseDate'>${album[i].releaseDate}</span>
                 </li>
               </ul>
             </div>
@@ -94,6 +110,7 @@ $('#albums').append(`
     </div>
   </div>
 `)
+  }
   console.log('rendering album:', album);
 
 }
