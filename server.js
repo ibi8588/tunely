@@ -14,6 +14,9 @@ var controllers = require('./controllers');
 
 app.get('/api', controllers.api.index);
 
+app.get('/api/albums', controllers.api.index);
+
+
 app.listen(process.env.PORT || 3000, function(){
   console.log('Wuuurk');
 });

@@ -52,7 +52,6 @@ $(document).ready(function() {
 });
 
 function handleSuccess (albums) {
-  // albums.forEach(function(album){
     renderAlbum(albums);
   };
 
