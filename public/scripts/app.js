@@ -52,9 +52,10 @@ $(document).ready(function() {
 });
 
 function handleSuccess (albums) {
+  // albums.forEach(function(album){
     renderAlbum(albums);
   };
-
+;
 
 function handleError(err){
   console.log('There has been an error: ', err);

@@ -34,7 +34,7 @@ db.Album.remove({}, function(err, removed){
   console.log(`removed ${removed}`)
   db.Album.create(albums, function(err, created){
     if(err) { return console.log('error' + err); }
-    console.log("all albumss", created);
+    console.log("all albums", created);
     process.exit();
   });
 });
